@@ -13,6 +13,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import *
 
+BOLD = '\033[1m'
+SOLDOUT_BLUE = '\033[94m'
+EXIST_GREEN = '\033[92m'
+ENDC = '\033[0m'
+
 # GET IT BY YOUR HANDS
 class switch_cercatore(object):
     """ Switch 'Cercatore' """
@@ -67,29 +72,31 @@ class switch_cercatore(object):
         title = items['title']
 
         # Connect specific page.
-        msg = "Checker - Try connecting My Nintendo Store. "
+        msg = BOLD + "Checker - Try connecting My Nintendo Store." + ENDC
         self.browser.get(url)
         assert title in self.browser.title
-        msg = "Checker - connected My Nintendo Store. "
+        msg = BOLD + "Checker - connected My Nintendo Store." + ENDC
         logging.info(msg)
 
         xpath = "//div[@id='HAC_S_KAYAA']/p[@class='stock']"
         element = self.browser.find_element_by_xpath(xpath)
 
         if element.text == "SOLD OUT":
-            msg = "Checker - Nintendo Switch is SOLD OUT."
+            msg = SOLDOUT_BLUE + "Checker - Nintendo Switch is SOLD OUT." + ENDC
             logging.info(msg)
         else:
-            logging.info("Checker - It is time to get Nintendo Switch!!")
+            logging.info(EXIST_GREEN + "Checker - It is time to get Nintendo Switch!!" + ENDC)
 
     def _amazon_checker(self, items):
         url = items['url']
         title = items['title']
 
         # Connect specific page.
+        msg = BOLD + "Checker - Try connecting Amazon's Nintendo Switch page." + ENDC
+        logging.info(msg)
         self.browser.get(url)
         assert title in self.browser.title
-        msg = "Checker - connected Amazon's Nintendo Switch page. "
+        msg = BOLD + "Checker - connected Amazon's Nintendo Switch page." + ENDC
         logging.info(msg)
 
         xpath = "//span[@id='priceblock_ourprice']"
@@ -97,10 +104,10 @@ class switch_cercatore(object):
         str_price = element.text
         price = int(str_price.split(' ')[1].replace(',', ''))
         if price < 35000:
-            msg = "Checker - It is time to get Nintendo Switch!!"
+            msg = EXIST_GREEN + "Checker - It is time to get Nintendo Switch!!" + ENDC
             logging.info(msg)
         else:
-            msg = "Checker - This Switch is not proper."
+            msg = SOLDOUT_BLUE + "Checker - This Switch is not proper." + ENDC
             logging.info(msg)
 
     def _yodobashi_checker(self, items):
@@ -109,21 +116,21 @@ class switch_cercatore(object):
         is_soldout = True
 
         # Connect specific page.
-        msg = "Checker - Try Yodobashi's Nintendo Switch page. "
+        msg = BOLD + "Checker - Try Yodobashi's Nintendo Switch page." + ENDC
         logging.info(msg)
         self.browser.get(url)
         for title in titles:
             assert title in self.browser.title
-        msg = "Checker - Connected Yodobashi's Nintendo Switch page."
+        msg = BOLD + "Checker - Connected Yodobashi's Nintendo Switch page." + ENDC
         logging.info(msg)
         logging.info("Checker - Product name: {}".format(items['product']))
 
         xpath = "//div[@class='salesInfo']/p"
         if self._element_exist_by_xpath(xpath):
-            msg = "Checker - Nintendo Switch is SOLD OUT"
+            msg = SOLDOUT_BLUE + "Checker - Nintendo Switch is SOLD OUT" + ENDC
             logging.info(msg)
         else:
-            logging.info("Checker - It is time to get Nintendo Switch!!")
+            logging.info(EXIST_GREEN + "Checker - It is time to get Nintendo Switch!!" + ENDC)
             # Create visible browser instance.
             visible_browser = self._run_chrome()
             visible_browser.get(url)

@@ -1,0 +1,24 @@
+nintendo:
+  title: "My Nintendo Store"
+  url: "https://store.nintendo.co.jp/customize.html"
+amazon:
+  title: "Amazon | Nintendo Switch"
+  url: "http://amzn.asia/79RsjhF"
+yodobashi_gray:
+  title:
+    - "ヨドバシ.com"
+    - "Nintendo Switch"
+  url: "http://www.yodobashi.com/product/100000001003431565/"
+  product: "Nintendo Switch Gray"
+yodobashi_color:
+  title:
+    - "ヨドバシ.com"
+    - "Nintendo Switch"
+  url: "http://www.yodobashi.com/product/100000001003431566/"
+  product: "Nintendo Swicth Blue Red"
+yodobashi_splatoon:
+  title:
+    - "ヨドバシ.com"
+    - "Nintendo Switch"
+  url: "http://www.yodobashi.com/product/100000001003570628/"
+  product: "Nintendo Swicth スプラトゥーン2 カラー"

@@ -10,6 +10,7 @@ import job
 def job1():
     cercatore = switch_cercatore()
     cercatore.start_check()
+    cercatore.end_check()
 
 def _main():
     if not os.path.exists("./log"):
